@@ -33,38 +33,56 @@ was gifted to her by the victim.
 */
 
 
-female(kiyra).
-female(savita).
-male(rahul).
-male(jay).
-male(nick).
-suspobj(savita,goldchain).
-suspobj(nick,knife).
-working(kiyra,sleeping).
-working(nick,cooking).
-working(jay,watering).
-working(savita,market).
-working(ramu,cleaning).
+% persons involved
+person(kiyra, female).
+person(savita, female).
+person(rahul, male).
+person(jay, male).
+person(nick, male).
+
+% objects found
+suspicious_object(savita, gold_chain).
+suspicious_object(nick, knife).
+
+% alibis
+activity(kiyra, sleeping).
+activity(nick, cooking).
+activity(jay, watering).
+activity(savita, market).
+activity(ramu, cleaning).
+
+location(savita, first_floor).
+location(kiyra, first_floor).
+location(jay, lawn_area).
+location(nick, kitchen).
+location(ramu, first_floor).
+
 victim(rahul).
-weapon(savita,knife).
-weapon(nick,knife).
-location(savita,firstfloor).
-location(kiyara,firstfloor).
-location(jay,lawnarea).
-location(nick,kitchen).
-location(ramu,firstfloor).
 
-couple(rahul,kiyara).
-affair(rahul,savita).
+% possession of weapon
+weapon(savita, knife).
+weapon(nick, knife).
 
-gift(rahul,savita,goldchain).
-gift(rahul,kiyara,goldchain).
+% relationships
+couple(rahul, kiyra).
+affair(rahul, savita).
 
-canhaveweapon(X):-weapon(X,knife).
-canbeonlocation(X):-location(X,firstfloor).
-cankill(X):-working(X,market).
-motive(X):-affair(rahul,X).
-objectfound(X):-gift(rahul,X,goldchain).
-clue(X):-suspobj(X,goldchain).
-murderer(X):-
-cankill(X),motive(X),canhaveweapon(X),objectfound(X),canbeonlocation(X),clue(X).
+gift(rahul, savita, gold_chain).
+gift(rahul, kiyra, gold_chain).
+
+% Rules
+can_have_weapon(X) :- weapon(X, knife).
+can_be_on_location(X) :- location(X, first_floor).
+can_kill(X) :- activity(X, market).
+motive(X) :- affair(rahul, X).
+object_found(X) :- gift(rahul, X, gold_chain).
+clue(X) :- suspicious_object(X, gold_chain).
+
+% Predicate to identify potential murderers
+murderer(X) :-
+    can_kill(X),
+    motive(X),
+    can_have_weapon(X),
+    object_found(X),
+    can_be_on_location(X),
+    clue(X).
