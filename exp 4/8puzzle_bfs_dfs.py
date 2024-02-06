@@ -71,32 +71,33 @@ def solve_8_puzzle_bfs(initial_state):
     print("No solution found.")
 
 
-# def solve_8_puzzle_dfs(initial_state):
-#     initial_node = PuzzleNode(initial_state)
-#     stack = [initial_node]
-#     visited = set()
+def solve_8_puzzle_dfs(initial_state):
+    initial_node = PuzzleNode(initial_state)
+    stack = [initial_node]
+    visited = set()
 
-#     while stack:
-#         current_node = stack.pop()
-#         print(f"Move {current_node.move}")
-#         print_puzzle(current_node.state)
+    while stack:
+        current_node = stack.pop()
+        print(f"Move {current_node.move}")
+        print_puzzle(current_node.state)
 
-#         if current_node.state == goal_state:
-#             print("Goal state reached!")
-#             return
+        if current_node.state == goal_state:
+            print("Goal state reached!")
+            return
 
-#         visited.add(tuple(map(tuple, current_node.state)))
+        visited.add(tuple(map(tuple, current_node.state)))
 
-#         i, j = get_blank_position(current_node.state)
-#         possible_moves = generate_moves(i, j)
+        i, j = get_blank_position(current_node.state)
+        possible_moves = generate_moves(i, j)
 
-#         for move in possible_moves:
-#             new_state = apply_move(current_node.state, move)
-#             if tuple(map(tuple, new_state)) not in visited:
-#                 new_node = PuzzleNode(new_state, current_node, move)
-#                 stack.append(new_node)
+        for move in possible_moves:
+            new_state = apply_move(current_node.state, move)
+            if tuple(map(tuple, new_state)) not in visited:
+                new_node = PuzzleNode(new_state, current_node, move)
+                stack.append(new_node)
 
-#     print("No solution found.")
+    print("No solution found.")
+
 
 
 # Example initial and goal states
@@ -107,6 +108,6 @@ goal_state = [[1, 2, 3], [4, 6, 0], [7, 5, 8]]
 print("Solving using BFS:")
 solve_8_puzzle_bfs(initial_state)
 
-# # Solve the puzzle using DFS
-# print("\nSolving using DFS:")
-# solve_8_puzzle_dfs(initial_state)
+# Solve the puzzle using DFS
+print("\nSolving using DFS:")
+solve_8_puzzle_dfs(initial_state)
