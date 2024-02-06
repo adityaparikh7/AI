@@ -141,12 +141,6 @@ def main():
 
         choice = input("Enter your choice (1-4): ")
 
-        print("Move guide")
-        print("(-1,0): Up")
-        print("(1,0): Down")
-        print("(0,-1): Left")
-        print("(0,1): Right")
-        
         if choice == '1':
             print("\nSolving using BFS:")
             solve_bfs(initial_state, goal_state)
