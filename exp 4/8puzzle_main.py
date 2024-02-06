@@ -141,6 +141,12 @@ def main():
 
         choice = input("Enter your choice (1-4): ")
 
+        print("Move guide")
+        print("(-1,0): Up")
+        print("(1,0): Down")
+        print("(0,-1): Left")
+        print("(0,1): Right")
+        
         if choice == '1':
             print("\nSolving using BFS:")
             solve_bfs(initial_state, goal_state)
@@ -149,7 +155,7 @@ def main():
             solve_dfs(initial_state, goal_state)
         elif choice == '3':
             depth_limit = int(input("Enter the depth limit for Depth-Limited Search: "))
-            print(f"\nSolving using Depth-Limited Search (Depth Limit: {depth_limit}):")
+            print(f"\nSolving using Depth Limited Search (Depth Limit: {depth_limit}):")
             result = solve_dls(PuzzleNode(initial_state), goal_state, depth_limit)
             if result:
                 print_solution(result)
