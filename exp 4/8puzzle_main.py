@@ -39,27 +39,6 @@ def apply_move(state, move):
     return new_state
 
 
-def solve_dls(node, goal_state, depth_limit):
-    if node.state == goal_state:
-        return node
-
-    if depth_limit == 0:
-        return None
-
-    i, j = get_blank_position(node.state)
-    possible_moves = generate_moves(i, j)
-
-    for move in possible_moves:
-        new_state = apply_move(node.state, move)
-        new_node = PuzzleNode(new_state, node, move)
-
-        result = solve_dls(new_node, goal_state, depth_limit - 1)
-        if result:
-            return result
-
-    return None
-
-
 def solve_bfs(initial_state, goal_state):
     initial_node = PuzzleNode(initial_state)
     queue = [initial_node]
@@ -116,6 +95,27 @@ def solve_dfs(initial_state, goal_state):
     print("No solution found.")
 
 
+def solve_dls(node, goal_state, depth_limit):
+    if node.state == goal_state:
+        return node
+
+    if depth_limit == 0:
+        return None
+
+    i, j = get_blank_position(node.state)
+    possible_moves = generate_moves(i, j)
+
+    for move in possible_moves:
+        new_state = apply_move(node.state, move)
+        new_node = PuzzleNode(new_state, node, move)
+
+        result = solve_dls(new_node, goal_state, depth_limit - 1)
+        if result:
+            return result
+
+    return None
+
+
 def print_solution(node):
     path = []
     while node:
@@ -148,12 +148,9 @@ def main():
             print("\nSolving using DFS:")
             solve_dfs(initial_state, goal_state)
         elif choice == '3':
-            depth_limit = int(
-                input("Enter the depth limit for Depth-Limited Search: "))
-            print(
-                f"\nSolving using Depth-Limited Search (Depth Limit: {depth_limit}):")
-            result = solve_dls(PuzzleNode(
-                initial_state), goal_state, depth_limit)
+            depth_limit = int(input("Enter the depth limit for Depth-Limited Search: "))
+            print(f"\nSolving using Depth-Limited Search (Depth Limit: {depth_limit}):")
+            result = solve_dls(PuzzleNode(initial_state), goal_state, depth_limit)
             if result:
                 print_solution(result)
             else:
