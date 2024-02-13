@@ -31,18 +31,34 @@ def greedy_best_first_search(graph, start, goal, heuristic):
 
     return None, None
 
+# Function to input a graph from the user
 
-# Example usage:
-graph = {
-    'A': {'B': 1, 'C': 3},
-    'B': {'A': 1, 'D': 5},
-    'C': {'A': 3, 'E': 2},
-    'D': {'B': 5},
-    'E': {'C': 2}
-}
 
-start_node = 'A'
-goal_node = 'E'
+def input_graph():
+    graph = {}
+    while True:
+        edge = input(
+            "Enter an edge (start end cost), or 'done' to finish: ").split()
+        if edge[0].lower() == 'done':
+            break
+        start, end, cost = edge
+        cost = int(cost)
+        if start not in graph:
+            graph[start] = {}
+        graph[start][end] = cost
+        # Assuming an undirected graph, adding reverse edge
+        if end not in graph:
+            graph[end] = {}
+        graph[end][start] = cost
+    return graph
+
+
+# Take user input for the graph
+graph = input_graph()
+
+# Take user input for the start and goal nodes
+start_node = input("Enter the start node: ")
+goal_node = input("Enter the goal node: ")
 
 
 def heuristic(node):
