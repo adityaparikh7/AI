@@ -52,9 +52,25 @@ def input_graph():
         graph[end][start] = cost
     return graph
 
+# Function to print the input graph
+def print_graph(graph):
+    print("Input Graph:")
+    for node, neighbors in graph.items():
+        print(f"{node} -> {neighbors}")
+
 
 # Take user input for the graph
-graph = input_graph()
+# graph = input_graph()
+graph = {
+    'A': {'B': 1, 'C': 3},
+    'B': {'A': 1, 'D': 5},
+    'C': {'A': 3, 'E': 2},
+    'D': {'B': 5},
+    'E': {'C': 2}
+}
+
+# Print the input graph
+print_graph(graph)
 
 # Take user input for the start and goal nodes
 start_node = input("Enter the start node: ")
