@@ -1,6 +1,5 @@
 import heapq
 
-
 def greedy_best_first_search(graph, start, goal, heuristic):
     priority_queue = [(heuristic(start), start)]
     visited = set()
@@ -10,7 +9,7 @@ def greedy_best_first_search(graph, start, goal, heuristic):
     while priority_queue:
         current_cost, current_node = heapq.heappop(priority_queue)
         
-        print(f"Visiting {current_node} with heuristic value {current_cost}")
+        # print(f"Visiting {current_node} with heuristic value {current_cost}")
 
         if current_node == goal:
             # Reconstruct the path from the goal to the start
